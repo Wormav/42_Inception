@@ -15,10 +15,13 @@ volumes :
       type: none
 services:
   wordpress:
-    container_name: inception-wordpress
-    build: ./wordpress/
+    container_name: wordpress
+    image: wordpress
+    build:
+      context: ./wordpress/
+      dockerfile: Dockerfile
     networks:
-      - inception
+      - docker-network
     volumes:
       - wordpress:/var/www/html
     depends_on:
@@ -29,10 +32,13 @@ services:
       - .env
     restart: unless-stopped
   mariadb:
-    container_name: inception-mariadb
-    build: ./mariadb/
+    container_name: mariadb
+    image: mariadb
+    build:
+      context: ./mariadb/
+      dockerfile: Dockerfile
     networks:
-      - inception
+      - docker-network
     volumes:
       - mariadb:/var/lib/mysql
     expose:
@@ -42,10 +48,13 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
     restart: unless-stopped
   nginx:
-    container_name: inception-nginx
-    build: ./nginx/
+    container_name: nginx
+    image: nginx
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
     networks:
-      - inception
+      - docker-network
     volumes:
       - wordpress:/var/www/html
       - ./nginx/ssl:/etc/nginx/ssl
@@ -56,6 +65,6 @@ services:
       - mariadb
     restart: unless-stopped
 networks:
-  inception:
-    name: inception
+  docker-network:
+    name: docker-network
     driver: bridge
