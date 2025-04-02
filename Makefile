@@ -1,13 +1,5 @@
 all: dirs build
 
-restart:
-	@echo "Redémarrage du service Docker..."
-	@sudo pkill Docker || true
-	@echo "Attente du démarrage de Docker..."
-	@open -a Docker
-	@sleep 10
-	@echo "Docker redémarré"
-
 dirs:
 	@mkdir -p data/mariadb
 	@mkdir -p data/wordpress
@@ -31,6 +23,5 @@ clean:
 
 fclean: clean
 	@echo "Removing data directory..."
-	@rm -rf data/
 
-.PHONY: all dirs build up down clean fclean prune
+.PHONY: all dirs build up down clean fclean
