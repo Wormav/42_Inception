@@ -3,6 +3,7 @@ all: dirs build
 dirs:
 	@mkdir -p data/mariadb
 	@mkdir -p data/wordpress
+	@mkdir -p data/adminer
 	@echo "Created data directories"
 
 build:
