@@ -13,6 +13,13 @@ volumes :
       device: ${DATA_DIR}/mariadb
       o: bind
       type: none
+  adminer:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DATA_DIR}/adminer
+
 services:
   wordpress:
     container_name: wordpress
@@ -64,6 +71,17 @@ services:
       - wordpress
       - mariadb
     restart: unless-stopped
+  adminer:
+    build: ./adminer
+    image: adminer
+    container_name: adminer
+    restart: always
+    networks:
+      - docker-network
+    depends_on:
+      - mariadb
+    volumes:
+      - adminer:/var/www/html
 networks:
   docker-network:
     name: docker-network

@@ -3,6 +3,7 @@ all: dirs build
 dirs:
 	@mkdir -p data/mariadb
 	@mkdir -p data/wordpress
+	@mkdir -p data/adminer
 	@echo "Created data directories"
 
 build:
@@ -13,15 +14,14 @@ start:
 	@echo "Starting containers..."
 	@docker-compose -f srcs/docker-compose.yml up -d
 
-down:
+stop:
 	@echo "Stopping and removing containers..."
 	@docker-compose -f srcs/docker-compose.yml down
 
-clean:
-	@echo "Cleaning up containers and images..."
-	@docker-compose -f srcs/docker-compose.yml down --rmi all
+clean: stop
 
 fclean: clean
-	@echo "Removing data directory..."
+	@echo "Removing data directories..."
+	@rm -rf data
 
 .PHONY: all dirs build up down clean fclean
