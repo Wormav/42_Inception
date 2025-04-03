@@ -21,5 +21,7 @@ stop:
 clean: stop
 
 fclean: clean
+	@echo "Removing data directories..."
+	@rm -rf data
 
 .PHONY: all dirs build up down clean fclean

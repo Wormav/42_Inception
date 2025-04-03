@@ -2,7 +2,7 @@
 # adminer_script.sh
 
 # URL de téléchargement d'Adminer
-ADMINER_URL="https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php"
+ADMINER_URL="https://github.com/vrana/adminer/releases/download/v5.1.1/adminer-5.1.1.php"
 
 # Répertoire de destination
 DEST_DIR="/var/www/html"
