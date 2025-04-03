@@ -9,8 +9,14 @@ RUN apt-get update && apt-get install -y \
 # Création du répertoire pour Adminer
 RUN mkdir -p /var/www/html
 
-# Téléchargement d'Adminer
-RUN wget -O /var/www/html/index.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php
+# Copie du script shell dans l'image
+COPY adminer_script.sh /usr/local/bin/adminer_script.sh
+
+# Donner les permissions d'exécution au script
+RUN chmod +x /usr/local/bin/adminer_script.sh
+
+# Exécution du script pour télécharger Adminer
+RUN /usr/local/bin/adminer_script.sh
 
 # Configuration de PHP-FPM
 RUN mkdir -p /run/php
