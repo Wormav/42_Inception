@@ -1,4 +1,4 @@
-volumes :
+volumes:
   wordpress:
     name: wordpress
     driver: local
@@ -26,8 +26,7 @@ services:
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
-    tags:
-      - "wordpress"
+    image: custom-wordpress
     networks:
       - docker-network
     volumes:
@@ -40,13 +39,11 @@ services:
       - .env
     restart: unless-stopped
   mariadb:
-    image: mariadb
     container_name: mariadb
     build:
       context: ./mariadb/
       dockerfile: Dockerfile
-    tags:
-      - "mariadb"
+    image: custom-mariadb
     networks:
       - docker-network
     volumes:
@@ -58,13 +55,11 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
     restart: unless-stopped
   nginx:
-    image: nginx
     container_name: nginx
     build:
       context: ./nginx/
       dockerfile: Dockerfile
-    tags:
-      - "nginx"
+    image: custom-nginx
     networks:
       - docker-network
     volumes:
@@ -76,6 +71,20 @@ services:
       - wordpress
       - mariadb
     restart: unless-stopped
+  adminer:
+    container_name: adminer
+    build:
+      context: ./adminer/
+      dockerfile: Dockerfile
+    image: custom-adminer
+    networks:
+      - docker-network
+    depends_on:
+      - mariadb
+    volumes:
+      - adminer:/var/www/html
+    restart: always
+
 networks:
   docker-network:
     name: docker-network
