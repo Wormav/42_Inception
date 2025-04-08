@@ -26,7 +26,8 @@ services:
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
-    tags: wordpress
+    tags:
+      - "wordpress"
     networks:
       - docker-network
     volumes:
@@ -44,7 +45,8 @@ services:
     build:
       context: ./mariadb/
       dockerfile: Dockerfile
-    tags: mariadb
+    tags:
+      - "mariadb"
     networks:
       - docker-network
     volumes:
@@ -61,7 +63,8 @@ services:
     build:
       context: ./nginx/
       dockerfile: Dockerfile
-    tags: nginx
+    tags:
+      - "nginx"
     networks:
       - docker-network
     volumes:
@@ -76,7 +79,8 @@ services:
   adminer:
     image: adminer
     build: ./adminer
-    tags: adminer
+    tags:
+      - "adminer"
     container_name: adminer
     restart: always
     networks:
