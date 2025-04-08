@@ -23,7 +23,7 @@ volumes :
 services:
   wordpress:
     container_name: wordpress
-    image: wordpress
+    tag: wordpress
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
@@ -34,13 +34,13 @@ services:
     depends_on:
       - mariadb
     expose:
-      - "9001"
+      - "9000"
     env_file:
       - .env
     restart: unless-stopped
   mariadb:
     container_name: mariadb
-    image: mariadb
+    tag: mariadb
     build:
       context: ./mariadb/
       dockerfile: Dockerfile
@@ -56,7 +56,7 @@ services:
     restart: unless-stopped
   nginx:
     container_name: nginx
-    image: nginx
+    tag: nginx
     build:
       context: ./nginx/
       dockerfile: Dockerfile
@@ -73,7 +73,7 @@ services:
     restart: unless-stopped
   adminer:
     build: ./adminer
-    image: adminer
+    tag: adminer
     container_name: adminer
     restart: always
     networks:

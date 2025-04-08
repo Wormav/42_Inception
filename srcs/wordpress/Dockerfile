@@ -17,7 +17,7 @@ COPY script.sh .
 
 RUN chmod +x script.sh
 
-EXPOSE 9001
+EXPOSE 9000
 
 ENTRYPOINT ["/var/www/html/script.sh"]
 
