@@ -77,8 +77,9 @@ services:
       - mariadb
     restart: unless-stopped
   adminer:
-    image: adminer
-    build: ./adminer
+    build:
+      context: ./adminer/
+      dockerfile: Dockerfile
     tags:
       - "adminer"
     container_name: adminer
