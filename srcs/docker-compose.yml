@@ -26,7 +26,7 @@ services:
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
-    image: custom-wordpress
+    image: regardejevienspasdedockerhub
     networks:
       - docker-network
     volumes:
