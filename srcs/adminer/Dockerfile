@@ -24,7 +24,7 @@ RUN mkdir -p /run/php
 COPY www.conf /etc/php/7.4/fpm/pool.d/
 
 # Exposition du port pour PHP-FPM
-EXPOSE 9000
+EXPOSE 9001
 
 # Démarrage de PHP-FPM
 CMD ["/usr/sbin/php-fpm7.4", "-F"]

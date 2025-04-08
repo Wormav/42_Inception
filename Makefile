@@ -1,4 +1,4 @@
-all: start_docker dirs build start
+all: dirs build start
 
 start_docker:
 	@echo "Starting Docker service..."
@@ -13,19 +13,23 @@ dirs:
 	@mkdir -p data/mariadb
 	@mkdir -p data/wordpress
 	@mkdir -p data/adminer
+	@chmod 755 data
+	@chmod 755 data/mariadb
+	@chmod 755 data/wordpress
+	@chmod 755 data/adminer
 	@echo "Created data directories"
 
 build:
 	@echo "Building images..."
-	@docker-compose -f srcs/docker-compose.yml build
+	@docker compose -f srcs/docker-compose.yml build
 
 start:
 	@echo "Starting containers..."
-	@docker-compose -f srcs/docker-compose.yml up -d
+	@docker compose -f srcs/docker-compose.yml up -d
 
 stop:
 	@echo "Stopping and removing containers..."
-	@docker-compose -f srcs/docker-compose.yml down
+	@docker compose -f srcs/docker-compose.yml down
 
 stop_docker:
 	@echo "Stopping Docker service..."
@@ -34,7 +38,7 @@ stop_docker:
 
 clean: stop
 
-fclean: clean stop_docker
+fclean: clean
 	@echo "Removing data directories..."
 	@rm -rf data
 
