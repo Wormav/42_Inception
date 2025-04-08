@@ -22,11 +22,11 @@ volumes :
 
 services:
   wordpress:
-    image: wordpress:tag
     container_name: wordpress
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
+    tags: wordpress
     networks:
       - docker-network
     volumes:
@@ -39,11 +39,12 @@ services:
       - .env
     restart: unless-stopped
   mariadb:
-    image: mariadb:tag
+    image: mariadb
     container_name: mariadb
     build:
       context: ./mariadb/
       dockerfile: Dockerfile
+    tags: mariadb
     networks:
       - docker-network
     volumes:
@@ -55,11 +56,12 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
     restart: unless-stopped
   nginx:
-    image: nginx:tag
+    image: nginx
     container_name: nginx
     build:
       context: ./nginx/
       dockerfile: Dockerfile
+    tags: nginx
     networks:
       - docker-network
     volumes:
@@ -72,8 +74,9 @@ services:
       - mariadb
     restart: unless-stopped
   adminer:
-    image: adminer:tag
+    image: adminer
     build: ./adminer
+    tags: adminer
     container_name: adminer
     restart: always
     networks:
