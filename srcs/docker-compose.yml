@@ -22,11 +22,11 @@ volumes:
 
 services:
   wordpress:
-    container_name: jlorette-wordpress
+    container_name: wordpress
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
-    image: jlorette-wordpress
+    image: wordpress
     networks:
       - docker-network
     volumes:
@@ -39,11 +39,11 @@ services:
       - .env
     restart: unless-stopped
   mariadb:
-    container_name: jlorette-mariadb
+    container_name: mariadb
     build:
       context: ./mariadb/
       dockerfile: Dockerfile
-    image: jlorette-mariadb
+    image: mariadb
     networks:
       - docker-network
     volumes:
@@ -55,11 +55,11 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
     restart: unless-stopped
   nginx:
-    container_name: jlorette-nginx
+    container_name: nginx
     build:
       context: ./nginx/
       dockerfile: Dockerfile
-    image: jlorette-nginx
+    image: nginx
     networks:
       - docker-network
     volumes:
@@ -72,11 +72,11 @@ services:
       - mariadb
     restart: unless-stopped
   adminer:
-    container_name: jlorette-adminer
+    container_name: adminer
     build:
       context: ./adminer/
       dockerfile: Dockerfile
-    image: jlorette-adminer
+    image: adminer
     networks:
       - docker-network
     depends_on:

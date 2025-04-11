@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Hello, I am Jeremy Lorette. I certify that this image is custom.\n"
+
 cd /var/www/html
 
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar

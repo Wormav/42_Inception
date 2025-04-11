@@ -1,3 +1,8 @@
+DATA_DIR=/home/jlorette/data
+
+# Vérifie si les conteneurs sont en cours d'exécution
+containers_running = $(shell docker ps -q)
+
 all: dirs build start
 
 start_docker:
@@ -10,18 +15,19 @@ start_docker:
 	@echo "Docker is running."
 
 dirs:
-	@mkdir -p data/mariadb
-	@mkdir -p data/wordpress
-	@mkdir -p data/adminer
-	@chmod 755 data
-	@chmod 755 data/mariadb
-	@chmod 755 data/wordpress
-	@chmod 755 data/adminer
-	@echo "Created data directories"
+	@mkdir -p $(DATA_DIR)/mariadb
+	@mkdir -p $(DATA_DIR)/wordpress
+	@mkdir -p $(DATA_DIR)/adminer
+	@sudo chmod -R 755 $(DATA_DIR)
+	@echo "Created data directories at $(DATA_DIR)"
 
 build:
-	@echo "Building images..."
-	@docker compose -f srcs/docker-compose.yml build
+	@if [ -z "$(containers_running)" ]; then \
+		echo "Building images..."; \
+		docker compose -f srcs/docker-compose.yml build; \
+	else \
+		echo "Containers are already running. Skipping build."; \
+	fi
 
 start:
 	@echo "Starting containers..."
@@ -36,10 +42,13 @@ stop_docker:
 	@osascript -e 'quit app "Docker"'
 	@echo "Docker has been stopped."
 
+re: start
+
 clean: stop
 
 fclean: clean
-	@echo "Removing data directories..."
-	@rm -rf data
+	@echo "Removing data directories at $(DATA_DIR)..."
+	@sudo rm -rf $(DATA_DIR)
 
 .PHONY: all start_docker stop_docker dirs build start stop clean fclean
+
