@@ -4,6 +4,12 @@ Ce fichier décrit les étapes et les démonstrations à effectuer pour mener à
 
 ---
 
+### clean all docker
+
+```bash
+docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
+```
+
 ### Étape 0: Préparation (Très Important !) - Modifier le fichier `hosts`
 
 Pour que votre ordinateur puisse accéder à votre site via `https://jlorette.42.fr`, vous devez le faire pointer vers votre machine locale (`127.0.0.1`).
