@@ -67,7 +67,7 @@ Le but est de montrer que vous avez au moins deux utilisateurs avec des droits d
     *   Utilisateur : `batman`, Mot de passe : `adminpass` (le même que l'admin, comme défini dans le script).
     *   Montrez le tableau de bord **restreint**. L'utilisateur "Auteur" peut créer des articles, mais ne peut pas changer les réglages du site.
 
-#### B. Démo de la base de données (MariaDB)
+#### B. Démo de la base de données (Ligne de commande)
 
 Le but est de prouver que la base de données est fonctionnelle et contient des données.
 
@@ -89,6 +89,23 @@ Le but est de prouver que la base de données est fonctionnelle et contient des 
     ```
     *   ✅ Vous devriez voir `jlorette` et `batman` dans le résultat.
     *   Tapez `exit` pour quitter.
+
+#### C. Démo d'Adminer (Bonus)
+
+Adminer est une interface graphique pour gérer la base de données. C'est un excellent bonus à présenter.
+
+1.  **Accédez à Adminer** via votre navigateur :
+    ```
+    https://jlorette.42.fr/adminer
+    ```
+2.  **Remplissez le formulaire de connexion** :
+    *   Système : `MySQL`
+    *   Serveur : `mariadb` (c'est le nom du service Docker)
+    *   Utilisateur : `user` (depuis votre fichier `.env`)
+    *   Mot de passe : `password` (depuis votre fichier `.env`)
+    *   Base de données : `wordpress`
+3.  **Cliquez sur "Connexion".**
+    *   ✅ Vous devriez voir l'interface d'Adminer avec les tables de votre base de données (`wp_users`, `wp_posts`...) listées à gauche. C'est une preuve visuelle que tout fonctionne.
 
 ---
 
