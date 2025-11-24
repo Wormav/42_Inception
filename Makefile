@@ -1,4 +1,4 @@
-DATA_DIR=/home/jlorette/data
+DATA_DIR=~/data
 
 # Vérifie si les conteneurs sont en cours d'exécution
 containers_running = $(shell docker ps -q)
